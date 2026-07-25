@@ -32,12 +32,13 @@
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   hardware.graphics = {
-  enable = true;
-  extraPackages = with pkgs; [
-    intel-media-driver 
-    vpl-gpu-rt
-    intel-compute-runtime 
-  ];
-};
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver 
+      vpl-gpu-rt
+      intel-compute-runtime 
+    ];
+  };
 
 }
