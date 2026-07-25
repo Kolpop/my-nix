@@ -1,0 +1,34 @@
+{ config, pkgs, ... }:
+
+{
+
+  imports = [
+    ./modules/git.nix
+    ./modules/flameshot.nix
+    ./modules/fish.nix
+    ./modules/dunst.nix
+    ./modules/wm/kitty.nix
+    ./modules/wm/hyprpaper.nix
+    ./modules/wm/hyprland.nix
+    ./modules/wm/hyprlock.nix
+    ./modules/wm/waybar.nix
+    ./modules/wm/wlogout.nix
+    ./modules/wm/rofi.nix
+  ];
+
+  home.username = "boris";
+  home.homeDirectory = "/home/boris";
+
+  home.stateVersion = "26.05";
+
+  home.packages = with pkgs; [
+    neovim
+    htop
+    tmux
+    git
+    fastfetch
+  ];
+
+  programs.home-manager.enable = true;
+
+}
