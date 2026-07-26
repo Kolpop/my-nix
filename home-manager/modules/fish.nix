@@ -8,6 +8,7 @@
     shellAliases = {
       ll = "ls -lah";
       nix-switch = "sudo nixos-rebuild switch --flake /home/boris/nix";
+      git-update = "git add ./ && git commit -m \"update\" && git push"
     };
 
     plugins = [
