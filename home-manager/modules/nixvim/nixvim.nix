@@ -8,14 +8,15 @@
     extraConfig = ''
       set number
       set relativenumber
-      set tabstop=2
-      set shiftwidth=2
+      set tabstop=4
+      set shiftwidth=4
       set expandtab
       set termguicolors
 
       let mapleader = " "
       inoremap jk <ESC>
       nnoremap <leader>h :nohlsearch<CR>
+      nnoremap <leader>e :NvimTreeToggle<CR>
 
       function! StartNixLsp()
         if executable('nil')
@@ -57,12 +58,24 @@
       nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
       nnoremap K  <cmd>lua vim.lsp.buf.hover()<CR>
       nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
+
+      lua << EOF
+      require('lualine').setup({ options = { theme = 'tokyonight' } })
+      require('gitsigns').setup()
+      require('ibl').setup()
+      require('nvim-tree').setup({ sync_root_with_cwd = true, respect_buf_cwd = true, update_focused_file = { enable = true, update_root = true } })
+      EOF
     '';
 
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
       nvim-treesitter.withAllGrammars
       telescope-nvim
+      lualine-nvim
+      nvim-web-devicons
+      gitsigns-nvim
+      indent-blankline-nvim
+      nvim-tree-lua
     ];
 
     extraPackages = with pkgs; [
