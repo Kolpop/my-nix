@@ -1,58 +1,40 @@
-{ pkgs, config, ... }:
-
-{
-  programs.nixvim = {
+{ pkgs, ... }: {
+  programs.neovim = {
     enable = true;
     defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
 
-    # Опции редактора описываются как обычный Nix-аттрибут
-    opts = {
-      number = true;
-      relativenumber = true;
-      tabstop = 4;
-      shiftwidth = 4;
-      expandtab = true;
-      splitright = true;
-      splitbelow = true;
-      ignorecase = true;
-      smartcase = true;
-      termguicolors = true;
-    };
+    # Конфигурация в виде строк (без Lua-файлов)
+    extraConfig = ''
+      set number          " Номера строк
+      set relativenumber  " Относительные номера строк
+      set tabstop=4       " Табуляция в 4 пробела
+      set shiftwidth=4    " Размер отступа
+      set expandtab       " Табы -> пробелы
+      set splitright      " Вертикальный сплит справа
+      set termguicolors   " 24-битный цвет
 
-    # Настройка Leader-клавиши
-    globals.mapleader = " ";
+      " Классические горячие клавиши Vimscript
+      let mapleader = " "
+      inoremap jk <ESC>
+      nnoremap <leader>h :nohlsearch<CR>
+    '';
 
-    # Горячие клавиши в формате Nix
-    keymaps = [
-      {
-        mode = "i";
-        key = "jk";
-        action = "<ESC>";
-      }
-      {
-        mode = "n";
-        key = "<leader>h";
-        action = ":nohlsearch<CR>";
-      }
+    # Плагины берутся напрямую из вашего текущего nixpkgs
+    plugins = with pkgs.vimPlugins; [
+      tokyonight-nvim       # Тема оформления
+      nvim-treesitter.withAllGrammars # Подсветка синтаксиса
+      telescope-nvim        # Поиск по файлам
+      nvim-tree-lua         # Дерево файлов
     ];
 
-    # Включение и автонастройка плагинов одной строкой
-    colorschemes.tokyonight.enable = true;
-
-    plugins = {
-      telescope.enable = true;
-      nvim-tree.enable = true;
-      treesitter.enable = true;
-
-      # Настройка полноценного LSP без Lua и без Mason
-      lsp = {
-        enable = true;
-        servers = {
-          nil_ls.enable = true; # LSP для самого Nix
-          pyright.enable = true; # LSP для Python (если нужен)
-        };
-      };
-    };
+    # Системные пакеты, нужные для работы плагинов
+    extraPackages = with pkgs; [
+      ripgrep
+      fd
+      git
+    ];
   };
 }
 

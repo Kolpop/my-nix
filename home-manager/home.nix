@@ -23,7 +23,6 @@
   home.stateVersion = "26.05";
 
   home.packages = with pkgs; [
-    neovim
     htop
     tmux
     git
