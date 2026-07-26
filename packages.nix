@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   
@@ -28,6 +28,24 @@
     wlogout
     flatpak
     adwaita-icon-theme
+
+    #Разработка 
+    gnumake
+    gcc
+    clang
+    cmake
+    unzip
+    zip
+    wget
+    curl
+    python3
+    python3Packages.pip
+    python3Packages.virtualenv
+    nodejs_22
+    corepack
+    temurin-bin-21
+    maven
+    gradle
   ];
   
   fonts = {
