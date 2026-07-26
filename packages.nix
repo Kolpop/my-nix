@@ -29,7 +29,11 @@
     flatpak
     adwaita-icon-theme
 
-    #Разработка 
+    # Програмки
+    discord-ptb
+    telegram-desktop
+
+    # Разработка 
     gnumake
     gcc
     clang
