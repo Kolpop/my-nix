@@ -9,8 +9,11 @@
 
     catppuccin.url = "github:catppuccin/nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    nixvim.url = "github:nix-community/nixvim"
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = { self, nixpkgs, home-manager, catppuccin, nix-flatpak, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, catppuccin, nix-flatpak, nixvim, ... }@inputs: {
  
     nixosConfigurations.AZERTY = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
