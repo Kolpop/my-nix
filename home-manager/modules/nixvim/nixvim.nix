@@ -5,35 +5,75 @@
     viAlias = true;
     vimAlias = true;
 
-    # Конфигурация в виде строк (без Lua-файлов)
     extraConfig = ''
-      set number          " Номера строк
-      set relativenumber  " Относительные номера строк
-      set tabstop=4       " Табуляция в 4 пробела
-      set shiftwidth=4    " Размер отступа
-      set expandtab       " Табы -> пробелы
-      set splitright      " Вертикальный сплит справа
-      set termguicolors   " 24-битный цвет
+      set number
+      set relativenumber
+      set tabstop=4
+      set shiftwidth=4
+      set expandtab
+      set termguicolors
 
-      " Классические горячие клавиши Vimscript
       let mapleader = " "
       inoremap jk <ESC>
       nnoremap <leader>h :nohlsearch<CR>
+
+      function! StartNixLsp()
+        if executable('nil')
+          lua vim.lsp.start({ name = 'nil', cmd = {'nil'} })
+        endif
+      endfunction
+
+      function! StartPythonLsp()
+        if executable('pyright-langserver')
+          lua vim.lsp.start({ name = 'pyright', cmd = {'pyright-langserver', '--stdio'} })
+        endif
+      endfunction
+
+      function! StartJsLsp()
+        if executable('typescript-language-server')
+          lua vim.lsp.start({ name = 'ts_ls', cmd = {'typescript-language-server', '--stdio'} })
+        endif
+      endfunction
+
+      function! StartHtmlCssLsp()
+        if executable('vscode-html-language-server')
+          lua vim.lsp.start({ name = 'html', cmd = {'vscode-html-language-server', '--stdio'} })
+        endif
+      endfunction
+
+      function! StartJavaLsp()
+        if executable('jdtls')
+          lua vim.lsp.start({ name = 'jdtls', cmd = {'jdtls'} })
+        endif
+      endfunction
+
+      autocmd FileType nix call StartNixLsp()
+      autocmd FileType python call StartPythonLsp()
+      autocmd FileType javascript,typescript call StartJsLsp()
+      autocmd FileType html call StartHtmlCssLsp()
+      autocmd FileType css call StartHtmlCssLsp()
+      autocmd FileType java call StartJavaLsp()
+
+      nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
+      nnoremap K  <cmd>lua vim.lsp.buf.hover()<CR>
+      nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
     '';
 
-    # Плагины берутся напрямую из вашего текущего nixpkgs
     plugins = with pkgs.vimPlugins; [
-      tokyonight-nvim       # Тема оформления
-      nvim-treesitter.withAllGrammars # Подсветка синтаксиса
-      telescope-nvim        # Поиск по файлам
-      nvim-tree-lua         # Дерево файлов
+      tokyonight-nvim
+      nvim-treesitter.withAllGrammars
+      telescope-nvim
     ];
 
-    # Системные пакеты, нужные для работы плагинов
     extraPackages = with pkgs; [
       ripgrep
       fd
       git
+      nil
+      pyright
+      typescript-language-server
+      vscode-langservers-extracted
+      jdt-language-server
     ];
   };
 }
