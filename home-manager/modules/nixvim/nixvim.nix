@@ -8,8 +8,8 @@
     extraConfig = ''
       set number
       set relativenumber
-      set tabstop=4
-      set shiftwidth=4
+      set tabstop=2
+      set shiftwidth=2
       set expandtab
       set termguicolors
 
@@ -76,6 +76,9 @@
       gitsigns-nvim
       indent-blankline-nvim
       nvim-tree-lua
+      vim-vsnip
+      vim-snippets
+      friendly-snippets
     ];
 
     extraPackages = with pkgs; [
@@ -89,5 +92,6 @@
       jdt-language-server
     ];
   };
+
 }
 
