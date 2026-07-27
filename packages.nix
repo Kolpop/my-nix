@@ -7,32 +7,34 @@
   services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # Основная хуйня
     vim
     wget
     curl
-    hyprpaper
-    firefox
-    kitty
-    hyprlock
-    hypridle
-    flameshot
     wl-clipboard
     wireplumber
     brightnessctl
     nwg-look
     libnotify
-    rofi
-    waybar
     dunst
-    thunar
     wlogout
     flatpak
     adwaita-icon-theme
 
-    # Програмки
-    discord-ptb
-    telegram-desktop
+    # Hyprland
+    waybar
+    rofi
+    hyprlock
+    hypridle
+    hyprpaper
 
+    # Програмки
+    telegram-desktop
+    firefox
+    thunar
+    kitty
+    flameshot
+    
     # Разработка 
     gnumake
     gcc
@@ -58,13 +60,13 @@
     packages = with pkgs; [
       jetbrains-mono
       noto-fonts
-      noto-fonts-cjk-sans  # Для азиатских символов
-      noto-fonts-color-emoji     # Для цветных эмодзи
-      font-awesome         # Для иконок (замки, пользователи и др.)
+      noto-fonts-cjk-sans  # Для аниме девочек
+      noto-fonts-color-emoji     # Для смайликов
+      font-awesome         # иконки
 
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code
-      nerd-fonts.symbols-only # Универсальный пакет только с глифами/иконками
+      nerd-fonts.symbols-only # Хуйня 
     ];
 
     fontconfig = {
