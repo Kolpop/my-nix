@@ -12,7 +12,7 @@
     
     nyanvim.url = "github:dileep-kishore/nyanvim";
   };
-  outputs = { self, nixpkgs, home-manager, catppuccin, nix-flatpak, neovim, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, catppuccin, nix-flatpak, nyanvim, ... }@inputs: {
  
     nixosConfigurations.AZERTY = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };

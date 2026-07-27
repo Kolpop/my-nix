@@ -37,7 +37,7 @@
     "gitignore": {
       "inputs": {
         "nixpkgs": [
-          "neovim",
+          "nyanvim",
           "pre-commit-hooks",
           "nixpkgs"
         ]
@@ -74,41 +74,6 @@
         "owner": "nix-community",
         "ref": "release-26.05",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "neovim": {
-      "inputs": {
-        "nixCats": "nixCats",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "plugins-colorful-winsep-nvim": "plugins-colorful-winsep-nvim",
-        "plugins-early-retirement-nvim": "plugins-early-retirement-nvim",
-        "plugins-incline-nvim": "plugins-incline-nvim",
-        "plugins-lze": "plugins-lze",
-        "plugins-lzextras": "plugins-lzextras",
-        "plugins-maximize-nvim": "plugins-maximize-nvim",
-        "plugins-neopyter": "plugins-neopyter",
-        "plugins-obsidian-nvim": "plugins-obsidian-nvim",
-        "plugins-possession-nvim": "plugins-possession-nvim",
-        "plugins-reactive-nvim": "plugins-reactive-nvim",
-        "plugins-symbol-usage-nvim": "plugins-symbol-usage-nvim",
-        "plugins-timber-nvim": "plugins-timber-nvim",
-        "plugins-websocket-nvim": "plugins-websocket-nvim",
-        "pre-commit-hooks": "pre-commit-hooks"
-      },
-      "locked": {
-        "lastModified": 1760644521,
-        "narHash": "sha256-iVgAKQk9ZRMzeDrjVHvt2hHWQxIGo42XHLwHYxvrsBs=",
-        "owner": "dileep-kishore",
-        "repo": "nyanvim",
-        "rev": "9c3cfddf693f8610552addcec0ab79c25055b9e3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dileep-kishore",
-        "repo": "nyanvim",
         "type": "github"
       }
     },
@@ -157,6 +122,38 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1784432872,
+        "narHash": "sha256-n3gKTBIV4ZA5VQpUakffBe3KGu4+mhPoA34rrqS0GkA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fd1462031fdee08f65fd0b4c6b64e22239a77870",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1752900028,
+        "narHash": "sha256-dPALCtmik9Wr14MGqVXm+OQcv7vhPBXcWNIOThGnB/Q=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "6b4955211758ba47fac850c040a27f23b9b4008f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1730768919,
         "narHash": "sha256-8AKquNnnSaJRXZxc5YmF/WfmxiHX6MMZZasRP6RRQkE=",
         "owner": "NixOS",
@@ -171,19 +168,36 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nyanvim": {
+      "inputs": {
+        "nixCats": "nixCats",
+        "nixpkgs": "nixpkgs_3",
+        "plugins-colorful-winsep-nvim": "plugins-colorful-winsep-nvim",
+        "plugins-early-retirement-nvim": "plugins-early-retirement-nvim",
+        "plugins-incline-nvim": "plugins-incline-nvim",
+        "plugins-lze": "plugins-lze",
+        "plugins-lzextras": "plugins-lzextras",
+        "plugins-maximize-nvim": "plugins-maximize-nvim",
+        "plugins-neopyter": "plugins-neopyter",
+        "plugins-obsidian-nvim": "plugins-obsidian-nvim",
+        "plugins-possession-nvim": "plugins-possession-nvim",
+        "plugins-reactive-nvim": "plugins-reactive-nvim",
+        "plugins-symbol-usage-nvim": "plugins-symbol-usage-nvim",
+        "plugins-timber-nvim": "plugins-timber-nvim",
+        "plugins-websocket-nvim": "plugins-websocket-nvim",
+        "pre-commit-hooks": "pre-commit-hooks"
+      },
       "locked": {
-        "lastModified": 1784432872,
-        "narHash": "sha256-n3gKTBIV4ZA5VQpUakffBe3KGu4+mhPoA34rrqS0GkA=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "fd1462031fdee08f65fd0b4c6b64e22239a77870",
+        "lastModified": 1760644521,
+        "narHash": "sha256-iVgAKQk9ZRMzeDrjVHvt2hHWQxIGo42XHLwHYxvrsBs=",
+        "owner": "dileep-kishore",
+        "repo": "nyanvim",
+        "rev": "9c3cfddf693f8610552addcec0ab79c25055b9e3",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-26.05",
-        "repo": "nixpkgs",
+        "owner": "dileep-kishore",
+        "repo": "nyanvim",
         "type": "github"
       }
     },
@@ -399,7 +413,7 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "gitignore": "gitignore",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1750779888,
@@ -419,9 +433,9 @@
       "inputs": {
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
-        "neovim": "neovim",
         "nix-flatpak": "nix-flatpak",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2",
+        "nyanvim": "nyanvim"
       }
     }
   },
