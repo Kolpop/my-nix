@@ -42,8 +42,8 @@
               imports = [
                 catppuccin.homeManagerModules.catppuccin
                 ./home-manager/home.nix
-	            ];
-	          };
+	      ];
+	    };
           };
         }
       ];

@@ -3,6 +3,7 @@
 {
 
   imports = [
+    ./modules/neovim.nix
     ./modules/git.nix
     ./modules/flameshot.nix
     ./modules/fish.nix
