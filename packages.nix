@@ -20,6 +20,7 @@
     wlogout
     flatpak
     adwaita-icon-theme
+    julia
 
     # Hyprland
     waybar
