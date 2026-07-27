@@ -9,11 +9,8 @@
 
     catppuccin.url = "github:catppuccin/nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-
-    neovim = {
-      url = "github:dileep-kishore/nyanvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    
+    nyanvim.url = "github:dileep-kishore/nyanvim";
   };
   outputs = { self, nixpkgs, home-manager, catppuccin, nix-flatpak, neovim, ... }@inputs: {
  

@@ -3,7 +3,6 @@
 {
 
   imports = [
-    ./modules/neovim.nix
     ./modules/git.nix
     ./modules/flameshot.nix
     ./modules/fish.nix
@@ -27,7 +26,7 @@
     tmux
     git
     fastfetch
-    inputs.neovim.packages.${pkgs.system}.default
+    inputs.nyanvim.packages.${pkgs.system}.default
   ];
 
   programs.home-manager.enable = true;
