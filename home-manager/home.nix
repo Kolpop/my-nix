@@ -1,9 +1,8 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
 
   imports = [
-    ./modules/nixvim/nixvim.nix
     ./modules/git.nix
     ./modules/flameshot.nix
     ./modules/fish.nix
@@ -27,6 +26,7 @@
     tmux
     git
     fastfetch
+    inputs.neovim.packages.${pkgs.system}.default
   ];
 
   programs.home-manager.enable = true;

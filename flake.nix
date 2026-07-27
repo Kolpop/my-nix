@@ -10,10 +10,12 @@
     catppuccin.url = "github:catppuccin/nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    neovim = {
+      url = "github:dileep-kishore/nyanvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, home-manager, catppuccin, nix-flatpak, nixvim, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, catppuccin, nix-flatpak, neovim, ... }@inputs: {
  
     nixosConfigurations.AZERTY = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
@@ -34,12 +36,15 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 
-          home-manager.users.boris = {
-            imports = [
-              catppuccin.homeManagerModules.catppuccin
-              ./home-manager/home.nix
-	    ];
-	  };
+          home-manager = {
+            extraSpecialArgs = { inherit inputs; };
+            users.boris = {
+              imports = [
+                catppuccin.homeManagerModules.catppuccin
+                ./home-manager/home.nix
+	            ];
+	          };
+          };
         }
       ];
     };
