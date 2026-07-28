@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
-
 {
+  pkgs,
+  lib,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -30,7 +32,7 @@
       hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
       hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
       hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
-      
+
       hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
       hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
@@ -41,42 +43,41 @@
     '';
 
     settings = {
-      
-      mainMod = { _var = "SUPER"; };
-      browser = { _var = "firefox"; };
-      terminal = { _var = "kitty"; };
-      launcher = { _var = "rofi -show drun || pkill rofi"; };
-      provodnic = { _var = "thunar"; };      
-      
-      screenshots_dir = { _var = "~/Downloads"; };
-      
+      mainMod = {_var = "SUPER";};
+      browser = {_var = "firefox";};
+      terminal = {_var = "kitty";};
+      launcher = {_var = "rofi -show drun || pkill rofi";};
+      provodnic = {_var = "thunar";};
+
+      screenshots_dir = {_var = "~/Downloads";};
+
       on = {
         _args = [
           "hyprland.start"
-	  (lib.generators.mkLuaInline "function()\n  hl.exec_cmd(\"waybar\")\nend")
-	];
+          (lib.generators.mkLuaInline "function()\n  hl.exec_cmd(\"waybar\")\nend")
+        ];
       };
 
       monitor = [
         {
           output = "eDP-1";
-	  mode = "1920x1080@60";
-	  position = "0x0";
-	  scale = 1;
-	}
+          mode = "1920x1080@60";
+          position = "0x0";
+          scale = 1;
+        }
       ];
 
       config = [
-        { 
-	  general = {
-            gaps_in  = 5;
+        {
+          general = {
+            gaps_in = 5;
             gaps_out = 20;
 
             border_size = 2;
 
             col = {
-               active_border   = "rgba(fefffcff)";
-               inactive_border = "rgba(595959aa)";
+              active_border = "rgba(fefffcff)";
+              inactive_border = "rgba(595959aa)";
             };
 
             resize_on_border = false;
@@ -84,103 +85,99 @@
             allow_tearing = false;
 
             layout = "dwindle";
-	  };
-	  decoration = {
-            rounding       = 6;
+          };
+          decoration = {
+            rounding = 6;
             rounding_power = 2;
 
-            active_opacity   = 1.0;
+            active_opacity = 1.0;
             inactive_opacity = 0.95;
 
             shadow = {
-              enabled      = true;
-              range        = 4;
+              enabled = true;
+              range = 4;
               render_power = 3;
-              color        = "0xee1a1a1a";
+              color = "0xee1a1a1a";
             };
 
             blur = {
-              enabled   = true;
-              size      = 3;
-              passes    = 1;
-              vibrancy  = 0.1696;
+              enabled = true;
+              size = 3;
+              passes = 1;
+              vibrancy = 0.1696;
             };
           };
           input = {
             kb_layout = "us, ru";
-	    kb_options = "grp:alt_shift_toggle";
-	    follow_mouse = 1;
-	  };
-	}
+            kb_options = "grp:alt_shift_toggle";
+            follow_mouse = 1;
+          };
+        }
       ];
 
       bind = lib.lists.flatten [
-      
         {
-	  _args = [
+          _args = [
             "SUPER + Q"
-	    (lib.generators.mkLuaInline "hl.dsp.exec_cmd(terminal)")
-	  ];
-	}
-        
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(terminal)")
+          ];
+        }
+
         {
           _args = [
             "SUPER + B"
-	    (lib.generators.mkLuaInline "hl.dsp.exec_cmd(browser)")
-	  ];
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(browser)")
+          ];
         }
 
-	{
-	  _args = [
+        {
+          _args = [
             "SUPER + R"
-	    (lib.generators.mkLuaInline "hl.dsp.exec_cmd(launcher)")
-	  ];
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(launcher)")
+          ];
         }
 
         {
-	  _args = [
+          _args = [
             "SUPER + SPACE"
-	    (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"hyprlock\")")
-	  ];
-        }
-
-	{
-	  _args = [
-            "SUPER + E"
-	    (lib.generators.mkLuaInline "hl.dsp.exec_cmd(provodnic)")
-	  ];
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"hyprlock\")")
+          ];
         }
 
         {
-	  _args = [
+          _args = [
+            "SUPER + E"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(provodnic)")
+          ];
+        }
+
+        {
+          _args = [
             "SUPER + L"
-	    (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"flameshot gui -p \" .. screenshots_dir)")
-	  ];
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"flameshot gui -p \" .. screenshots_dir)")
+          ];
         }
 
         {
           _args = [
             "SUPER + C"
-	    (lib.generators.mkLuaInline "hl.dsp.window.close()")
-	    { locked = true; }
-	  ];
-	}
-        
-        (builtins.genList (x: 
-          let
-     	    ws = x + 1;
-	    modResult = ws - (ws / 10) * 10;
-   	    key = builtins.toString modResult;
-          in
-	  [
-	    { _args = [ (lib.generators.mkLuaInline "mainMod .. \" + \" .. \"${key}\"") (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = ${builtins.toString ws} })") ]; }
-            { _args = [ (lib.generators.mkLuaInline "mainMod .. \" + SHIFT + \" .. \"${key}\"") (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = ${builtins.toString ws} })") ]; }
-	  ]
-        ) 10)
+            (lib.generators.mkLuaInline "hl.dsp.window.close()")
+            {locked = true;}
+          ];
+        }
 
-
+        (builtins.genList (
+            x: let
+              ws = x + 1;
+              modResult = ws - (ws / 10) * 10;
+              key = builtins.toString modResult;
+            in [
+              {_args = [(lib.generators.mkLuaInline "mainMod .. \" + \" .. \"${key}\"") (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = ${builtins.toString ws} })")];}
+              {_args = [(lib.generators.mkLuaInline "mainMod .. \" + SHIFT + \" .. \"${key}\"") (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = ${builtins.toString ws} })")];}
+            ]
+          )
+          10)
       ];
-
     };
   };
   home.pointerCursor = {
@@ -210,4 +207,3 @@
     };
   };
 }
-

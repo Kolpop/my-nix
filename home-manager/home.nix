@@ -1,7 +1,9 @@
-{ config, inputs, pkgs, ... }:
-
 {
-
+  config,
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ./modules/git.nix
     ./modules/flameshot.nix
@@ -30,5 +32,4 @@
   ];
 
   programs.home-manager.enable = true;
-
 }
