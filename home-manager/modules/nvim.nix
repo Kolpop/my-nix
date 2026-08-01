@@ -6,29 +6,29 @@
     defaultEditor = true;
 
     extraPackages = with pkgs; [
-      tree-sitter       
-      trash-cli         
-      git               
-      gcc               
-      gnumake           
-      ripgrep           
-      fd                
-      ghostscript       
-      mermaid-cli       
+      tree-sitter
+      trash-cli
+      git
+      gcc
+      gnumake
+      ripgrep
+      fd
+      ghostscript
+      mermaid-cli
 
-      nil                         
-      nixfmt-rfc-style            
-      lua-language-server         
-      pyright                     
-      typescript-language-server 
-      vscode-langservers-extracted 
-      
-      jdk                         
-      jdt-language-server         
-      maven                       
-      gradle                      
+      nil
+      nixfmt-rfc-style
+      lua-language-server
+      pyright
+      typescript-language-server
+      vscode-langservers-extracted
+
+      jdk
+      jdt-language-server
+      maven
+      gradle
       vscode-extensions.vscjava.vscode-java-debug
-      vscode-extensions.vscjava.vscode-java-test  
+      vscode-extensions.vscjava.vscode-java-test
     ];
   };
 
@@ -53,7 +53,7 @@
         os.exit(1)
       end
     end
-    
+
     -- ИСПРАВЛЕНИЕ: Добавляем lazy.nvim в runtimepath и package.path, чтобы require("lazy") сработал
     vim.opt.rtp:prepend(lazypath)
     package.path = package.path .. ";" .. lazypath .. "/lua/?.lua;" .. lazypath .. "/lua/?/init.lua"
@@ -123,11 +123,14 @@
   # 3. Декларативное создание модуля plugins
   xdg.configFile."nvim/lua/plugins/config.lua".text = ''
     return {
+      -- Отключаем встроенный mason.nvim на NixOS
       { "williamboman/mason.nvim", enabled = false },
       { "williamboman/mason-lspconfig.nvim", enabled = false },
 
+      -- Конфигурируем системные LSP серверы напрямую
       {
         "neovim/nvim-lspconfig",
+        lazy = false, -- Загружать плагин всегда при старте, чтобы команды были доступны
         opts = {
           servers = {
             nil_ls = {}, lua_ls = {}, pyright = {}, ts_ls = {}, html = {}, cssls = {},
@@ -135,34 +138,39 @@
         },
       },
 
+      -- ИСПРАВЛЕННАЯ интеграция Java (jdtls) с LazyVim
       {
         "mfussenegger/nvim-jdtls",
+        lazy = false,
         opts = function()
+          -- Пути к плагинам отладки и тестирования, установленным через NixOS
           local java_debug_path = "${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug"
           local java_test_path = "${pkgs.vscode-extensions.vscjava.vscode-java-test}/share/vscode/extensions/vscjava.vscode-java-test"
+
           local bundles = {}
           local debug_jar = vim.fn.glob(java_debug_path .. "/server/com.microsoft.java.debug.plugin-*.jar", true)
           if debug_jar ~= "" then table.insert(bundles, debug_jar) end
+          
           local test_jars = vim.fn.glob(java_test_path .. "/server/*.jar", true, true)
           for _, jar in ipairs(test_jars) do
             if not vim.endswith(jar, "com.microsoft.java.test.runner-jar-with-dependencies.jar") then
               table.insert(bundles, jar)
             end
           end
+
+          -- Возвращаем чистые опции конфигурации для jdtls
           return {
             cmd = { "jdtls" },
-            root_dir = require("jdtls.setup").find_root({ ".git", "pom.xml", "build.gradle" }),
-            init_options = { bundles = bundles },
+            full_cmd = function(opts)
+              return opts.cmd
+            end,
+            dap = { bundles = bundles },
           }
         end,
       },
 
-      -- === ДОБАВЛЕНИЕ СНИППЕТОВ ===
-      -- В дистрибутиве LazyVim плагин native-snippets или LuaSnip автоматически 
-      -- подхватит базу friendly-snippets, как только она будет установлена.
+      -- Подключаем дружественные сниппеты
       { "rafamadriz/friendly-snippets" },
     }
   '';
 }
-
-

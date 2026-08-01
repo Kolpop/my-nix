@@ -12,44 +12,46 @@
 
     lazyvim.url = "github:pfassina/lazyvim-nix/v15.13.0";
   };
-  outputs = {
-    nixpkgs,
-    home-manager,
-    catppuccin,
-    nix-flatpak,
-    lazyvim,
-    ...
-  } @ inputs: {
-    nixosConfigurations.AZERTY = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      catppuccin,
+      nix-flatpak,
+      lazyvim,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.AZERTY = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
 
-      system = "x86_64-linux";
+        system = "x86_64-linux";
 
-      modules = [
-        ./configuration.nix
+        modules = [
+          ./configuration.nix
 
-        nix-flatpak.nixosModules.nix-flatpak
+          nix-flatpak.nixosModules.nix-flatpak
 
-        {
-          nixpkgs.config.allowUnfree = true;
-        }
+          {
+            nixpkgs.config.allowUnfree = true;
+          }
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-          home-manager = {
-            extraSpecialArgs = {inherit inputs;};
-            users.boris = {
-              imports = [
-                catppuccin.homeManagerModules.catppuccin
-                ./home-manager/home.nix
-              ];
+            home-manager = {
+              extraSpecialArgs = { inherit inputs; };
+              users.boris = {
+                imports = [
+                  catppuccin.homeManagerModules.catppuccin
+                  ./home-manager/home.nix
+                ];
+              };
             };
-          };
-        }
-      ];
+          }
+        ];
+      };
     };
-  };
 }
