@@ -9,42 +9,55 @@
 
     catppuccin.url = "github:catppuccin/nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    
+
     nyanvim.url = "github:dileep-kishore/nyanvim";
   };
-  outputs = { self, nixpkgs, home-manager, catppuccin, nix-flatpak, nyanvim, ... }@inputs: {
- 
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    catppuccin,
+    nix-flatpak,
+    nyanvim,
+    ...
+  } @ inputs: {
     nixosConfigurations.AZERTY = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
 
       system = "x86_64-linux";
 
       modules = [
         ./configuration.nix
 
+        {
+          nixpkgs.config.permittedInsecurePackages = [
+            "dotnet-sdk-7.0.410"
+            "dotnet-runtime-7.0.20" # Также может потребоваться рантайм, если он используется
+          ];
+        }
+
         nix-flatpak.nixosModules.nix-flatpak
 
         {
           nixpkgs.config.allowUnfree = true;
         }
-  
+
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 
           home-manager = {
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = {inherit inputs;};
             users.boris = {
               imports = [
                 catppuccin.homeManagerModules.catppuccin
                 ./home-manager/home.nix
-	      ];
-	    };
+              ];
+            };
           };
         }
       ];
     };
-
   };
 }

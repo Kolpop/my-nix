@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-
-{
-  
-  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+{pkgs, ...}: {
+  programs.gdk-pixbuf.modulePackages = [pkgs.librsvg];
 
   services.flatpak.enable = true;
 
@@ -21,6 +18,10 @@
     flatpak
     adwaita-icon-theme
     julia
+    android-file-transfer
+    heimdall-gui
+    unzip
+    zip
 
     # Hyprland
     waybar
@@ -35,8 +36,8 @@
     thunar
     kitty
     flameshot
-    
-    # Разработка 
+
+    # Разработка
     gnumake
     gcc
     clang
@@ -53,32 +54,32 @@
     temurin-bin-21
     maven
     gradle
+    dotnet-sdk_7
   ];
-  
+
   fonts = {
     enableDefaultPackages = true;
 
     packages = with pkgs; [
       jetbrains-mono
       noto-fonts
-      noto-fonts-cjk-sans  # Для аниме девочек
-      noto-fonts-color-emoji     # Для смайликов
-      font-awesome         # иконки
+      noto-fonts-cjk-sans # Для аниме девочек
+      noto-fonts-color-emoji # Для смайликов
+      font-awesome # иконки
 
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code
-      nerd-fonts.symbols-only # Хуйня 
+      nerd-fonts.symbols-only # Хуйня
     ];
 
     fontconfig = {
       enable = true;
       defaultFonts = {
-	monospace = [ "JetBrainsMono Nerd Font" ];
-	sansSerif = [ "Noto Sans" ];
-	serif = [ "Noto Serif" ];
-	emoji = [ "Noto Color Emoji" ];
+        monospace = ["JetBrainsMono Nerd Font"];
+        sansSerif = ["Noto Sans"];
+        serif = ["Noto Serif"];
+        emoji = ["Noto Color Emoji"];
       };
     };
   };
-
 }
