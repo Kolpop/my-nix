@@ -9,12 +9,15 @@
 
     catppuccin.url = "github:catppuccin/nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    lazyvim.url = "github:pfassina/lazyvim-nix/v15.13.0";
   };
   outputs = {
     nixpkgs,
     home-manager,
     catppuccin,
     nix-flatpak,
+    lazyvim,
     ...
   } @ inputs: {
     nixosConfigurations.AZERTY = nixpkgs.lib.nixosSystem {
