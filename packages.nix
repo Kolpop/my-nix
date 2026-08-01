@@ -18,8 +18,6 @@
     flatpak
     adwaita-icon-theme
     julia
-    android-file-transfer
-    heimdall-gui
     unzip
     zip
 
@@ -54,7 +52,6 @@
     temurin-bin-21
     maven
     gradle
-    dotnet-sdk_7
   ];
 
   fonts = {

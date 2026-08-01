@@ -9,16 +9,12 @@
 
     catppuccin.url = "github:catppuccin/nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-
-    nyanvim.url = "github:dileep-kishore/nyanvim";
   };
   outputs = {
-    self,
     nixpkgs,
     home-manager,
     catppuccin,
     nix-flatpak,
-    nyanvim,
     ...
   } @ inputs: {
     nixosConfigurations.AZERTY = nixpkgs.lib.nixosSystem {
@@ -28,13 +24,6 @@
 
       modules = [
         ./configuration.nix
-
-        {
-          nixpkgs.config.permittedInsecurePackages = [
-            "dotnet-sdk-7.0.410"
-            "dotnet-runtime-7.0.20" # Также может потребоваться рантайм, если он используется
-          ];
-        }
 
         nix-flatpak.nixosModules.nix-flatpak
 
