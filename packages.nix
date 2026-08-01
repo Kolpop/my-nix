@@ -20,6 +20,8 @@
     julia
     unzip
     zip
+    cliphist
+    clipse
 
     # Hyprland
     waybar

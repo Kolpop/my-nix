@@ -54,7 +54,7 @@
       on = {
         _args = [
           "hyprland.start"
-          (lib.generators.mkLuaInline "function()\n  hl.exec_cmd(\"waybar\")\nend")
+          (lib.generators.mkLuaInline "function()\n  hl.exec_cmd(\"waybar\")\n hl.exec_cmd(\"clipse -listen\")\nend")
         ];
       };
 
@@ -163,6 +163,13 @@
             "SUPER + C"
             (lib.generators.mkLuaInline "hl.dsp.window.close()")
             {locked = true;}
+          ];
+        }
+
+        {
+          _args = [
+            "SUPER + X"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"kitty --class clipse -e clipse\")")
           ];
         }
 
