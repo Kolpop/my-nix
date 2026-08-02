@@ -1,9 +1,12 @@
-{pkgs, ...}: {
-  programs.gdk-pixbuf.modulePackages = [pkgs.librsvg];
+{ pkgs, ... }: {
+  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # игры
+    prismlauncher
+
     # Основная хуйня
     vim
     wget
@@ -74,10 +77,10 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace = ["JetBrainsMono Nerd Font"];
-        sansSerif = ["Noto Sans"];
-        serif = ["Noto Serif"];
-        emoji = ["Noto Color Emoji"];
+        monospace = [ "JetBrainsMono Nerd Font" ];
+        sansSerif = [ "Noto Sans" ];
+        serif = [ "Noto Serif" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };
