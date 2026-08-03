@@ -1,11 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [
     # игры
-    prismlauncher
+    inputs.prismalauncher.packages.${pkgs.system}.prismlauncher
 
     # Основная хуйня
     vim
@@ -25,6 +25,7 @@
     zip
     cliphist
     clipse
+    steam-run
 
     # Hyprland
     waybar
