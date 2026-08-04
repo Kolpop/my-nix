@@ -26,6 +26,15 @@
     cliphist
     clipse
     steam-run
+    pavucontrol
+
+    # CLI чтобы повыебываться
+    hollywood
+    genact
+    cmatrix
+    cbonsai
+    btop
+    cava
 
     # Hyprland
     waybar
@@ -40,6 +49,7 @@
     thunar
     kitty
     flameshot
+    discord-ptb
 
     # Разработка
     gnumake
