@@ -27,6 +27,8 @@
     clipse
     steam-run
     pavucontrol
+    nmap
+    metasploit
 
     # CLI чтобы повыебываться
     hollywood
