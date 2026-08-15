@@ -8,6 +8,7 @@
     inputs.prismalauncher.packages.${pkgs.system}.prismlauncher
 
     # Основная хуйня
+    ocl-icd
     vim
     wget
     curl
@@ -27,8 +28,14 @@
     clipse
     steam-run
     pavucontrol
-    nmap
-    metasploit
+    qbittorrent
+
+    # Утилиты для аудита Wi-Fi и работы с Hashcat
+    hashcat
+    aircrack-ng
+    hcxtools
+    hcxdumptool
+    iw
 
     # CLI чтобы повыебываться
     hollywood
@@ -52,6 +59,7 @@
     kitty
     flameshot
     discord-ptb
+    figma-linux
 
     # Разработка
     gnumake
