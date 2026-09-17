@@ -9,7 +9,7 @@
       wallpaper = [
         {
           monitor = "eDP-1";
-	  path = "/home/boris/Downloads/Wallpapers/nix-Wallpaper.png";
+	  path = "/home/boris/Downloads/Wallpapers/nix-Wallpaper.jpg";
         } 
       ];
     };

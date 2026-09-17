@@ -48,6 +48,7 @@
       terminal = {_var = "kitty";};
       launcher = {_var = "rofi -show drun || pkill rofi";};
       provodnic = {_var = "thunar";};
+      editor = {_var = "code";};
 
       screenshots_dir = {_var = "~/Downloads";};
 
@@ -172,6 +173,14 @@
             (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"kitty --class clipse -e clipse\")")
           ];
         }
+
+        {
+          _args = [
+            "SUPER + G"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(editor)")
+          ];
+        }
+
 
         (builtins.genList (
             x: let

@@ -3,9 +3,19 @@
 
   services.flatpak.enable = true;
 
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-gtk
+    ];
+  };
+
+
   environment.systemPackages = with pkgs; [
     # игры
     inputs.prismalauncher.packages.${pkgs.system}.prismlauncher
+    temurin-bin-25
 
     # Основная хуйня
     ocl-icd
@@ -29,6 +39,7 @@
     steam-run
     pavucontrol
     qbittorrent
+    wine
 
     # Утилиты для аудита Wi-Fi и работы с Hashcat
     hashcat
@@ -58,8 +69,8 @@
     thunar
     kitty
     flameshot
-    discord-ptb
     figma-linux
+    discord-ptb
 
     # Разработка
     gnumake
@@ -78,6 +89,7 @@
     temurin-bin-21
     maven
     gradle
+    vscode
   ];
 
   fonts = {
