@@ -10,7 +10,7 @@
     catppuccin.url = "github:catppuccin/nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    lazyvim.url = "github:pfassina/lazyvim-nix/v15.13.0";
+    nixvim.url = "github:nix-community/nixvim";
     prismalauncher.url = "github:Diegiwg/PrismLauncher-Cracked";
 
   };
@@ -20,7 +20,7 @@
       home-manager,
       catppuccin,
       nix-flatpak,
-      lazyvim,
+      nixvim,
       prismalauncher,
       ...
     }@inputs:
