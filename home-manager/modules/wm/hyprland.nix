@@ -180,7 +180,13 @@
             (lib.generators.mkLuaInline "hl.dsp.exec_cmd(editor)")
           ];
         }
-
+        
+        {
+          _args = [
+            "SUPER + F"
+            (lib.generators.mkLuaInline "hl.dsp.window.fullscreen()")
+          ];
+        }
 
         (builtins.genList (
             x: let

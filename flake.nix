@@ -12,6 +12,7 @@
 
     lazyvim.url = "github:pfassina/lazyvim-nix/v15.13.0";
     prismalauncher.url = "github:Diegiwg/PrismLauncher-Cracked";
+
   };
   outputs =
     {
