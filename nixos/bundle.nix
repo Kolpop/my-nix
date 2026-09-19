@@ -9,6 +9,7 @@
     ./polkit.nix
     ./happ.nix
     ./steam.nix
+    ./nixvim.nix
   ];
 
 }
