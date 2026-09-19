@@ -5,8 +5,8 @@
   ...
 }: {
   imports = [
-    ./modules/nvim.nix
     ./modules/git.nix
+    ./modules/nixvim.nix
     ./modules/flameshot.nix
     ./modules/fish.nix
     ./modules/dunst.nix
