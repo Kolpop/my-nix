@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "ПОШЛА НАХУЙ ШВАЛЬ";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
@@ -48,6 +48,7 @@
               extraSpecialArgs = { inherit inputs; };
               users.boris = {
                 imports = [
+                  nixvim.homeManagerModules.nixvim
                   catppuccin.homeManagerModules.catppuccin
                   ./home-manager/home.nix
                 ];

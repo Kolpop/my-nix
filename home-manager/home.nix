@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./modules/nixvim.nix
     ./modules/git.nix
     ./modules/flameshot.nix
     ./modules/fish.nix
