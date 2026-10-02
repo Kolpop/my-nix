@@ -71,6 +71,7 @@
     flameshot
     figma-linux
     discord-ptb
+    gnome-pomodoro 
 
     # Разработка
     gnumake

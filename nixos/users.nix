@@ -12,6 +12,7 @@
       "input"
       "video"
       "render"
+      "vboxusers"
     ]; # Enable ‘sudo’ for the user.
 
     shell = pkgs.fish;
