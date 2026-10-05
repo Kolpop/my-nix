@@ -11,6 +11,10 @@
     ];
   };
 
+  programs.vscode = {
+    enable = true;
+
+  };
 
   environment.systemPackages = with pkgs; [
     # игры
@@ -90,8 +94,6 @@
     temurin-bin-21
     maven
     gradle
-    vscode
-    vscode.fhs
   ];
 
   fonts = {
