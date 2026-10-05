@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-драйвера и всю хуйню пишите сами мне впадлу
-=======
-=======
->>>>>>> 5cb3b0a08b9dcf3ac9372cf1a3cb6e43f7280018
 # My NixOS & Home Manager Configuration
 
 Личная конфигурация **NixOS** и **Home Manager**, построенная на базе **Flakes**. Система разделена на системный уровень (NixOS) и пользовательское окружение (Home Manager). 
@@ -12,19 +6,17 @@
 
 ## 🖼️ Скриншоты (Ricing)
 
-<<<<<<< HEAD
-![chlen](./screenshots/chlen.png)
+### Рабочее окружение и Аудио-визуализация
+![Плеер и визуализатор](./screenshots/music_and_visualizer.png)
+*Музыкальный плеер и аудио-визуализатор `cava`*
 
-![HARAM](./screenshots/HARAM.png)
+### Информация о системе (Fastfetch / Neofetch)
+![Системная информация](./screenshots/system_info.png)
+*Вывод системных характеристик в терминале `kitty`*
 
-![hui](./screenshots/hui.png)
-=======
-(./screenshots/chlen.png)
-
-(./screenshots/HARAM.png)
-
-(./screenshots/hui.png)
->>>>>>> 5cb3b0a08b9dcf3ac9372cf1a3cb6e43f7280018
+### Системный мониторинг и Эффекты
+![Мониторинг и эффекты](./screenshots/monitoring_and_effects.png)
+*Процесс-менеджер `htop`, заставка `cmatrix` и дерево процессов*
 
 ## 📁 Структура репозитория
 
@@ -125,7 +117,3 @@ sudo nixos-rebuild switch --flake .#AZERTY
 home-manager switch --flake .#boris
 ```
 
-<<<<<<< HEAD
->>>>>>> ac52e01 (update)
-=======
->>>>>>> 5cb3b0a08b9dcf3ac9372cf1a3cb6e43f7280018
