@@ -1,5 +1,5 @@
 {
-  description = "ПОШЛА НАХУЙ ШВАЛЬ";
+  description = "ПОШЛА НАХУЙ ШВАЛЬ ЕБАНАЯ";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
