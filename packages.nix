@@ -1,4 +1,29 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }: 
+
+let
+  vscode-doki = pkgs.writeShellScriptBin "code" ''
+    set -e
+
+    SRC="${pkgs.vscode}/lib/vscode"
+    DATA="''${XDG_DATA_HOME:-$HOME/.local/share}/vscode-doki"
+    DST="$DATA/vscode"
+
+    mkdir -p "$DATA"
+
+    if [ ! -e "$DST/code" ]; then
+      echo "Создаю writable VS Code для Doki..."
+      cp -a "$SRC" "$DST"
+    fi
+    
+    EXT="$DATA/extensions"
+    mkdir -p "$EXT"
+
+    export VSCODE_EXTENSIONS="$EXT"
+
+    exec "$DST/code" "$@"
+  '';
+
+in {
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   services.flatpak.enable = true;
@@ -9,11 +34,6 @@
       fcitx5-mozc
       fcitx5-gtk
     ];
-  };
-
-  programs.vscode = {
-    enable = true;
-
   };
 
   environment.systemPackages = with pkgs; [
@@ -94,6 +114,7 @@
     temurin-bin-21
     maven
     gradle
+    vscode-doki
   ];
 
   fonts = {
