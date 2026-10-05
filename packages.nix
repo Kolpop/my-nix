@@ -91,6 +91,7 @@
     maven
     gradle
     vscode
+    vscode.fhs
   ];
 
   fonts = {
