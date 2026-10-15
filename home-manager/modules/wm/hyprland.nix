@@ -188,6 +188,13 @@
           ];
         }
 
+        {
+          _args = [
+            "SUPER + Z"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(waybar || pkill waybar)")
+          ];
+        }
+
         (builtins.genList (
             x: let
               ws = x + 1;
