@@ -8,7 +8,8 @@
     # Главные настройки панели (генерирует config.jsonc)
     settings = {
       mainBar = { 
-      
+        ipc = true;
+     
         layer = "top";
         position = "top";
         spacing = 0;

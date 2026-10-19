@@ -1,8 +1,11 @@
 { pkgs, inputs, ... }: 
 
+# chmod -R u+rwX /home/boris/.local/share/vscode-doki/vscode для doki theme 
 let
   vscode-doki = pkgs.writeShellScriptBin "code" ''
     set -e
+
+    export XDG_DATA_DIRS="${pkgs.gtk3}/share/gsettings-schemas/gtk+3-${pkgs.gtk3.version}:''${XDG_DATA_DIRS:-}"
 
     SRC="${pkgs.vscode}/lib/vscode"
     DATA="''${XDG_DATA_HOME:-$HOME/.local/share}/vscode-doki"
