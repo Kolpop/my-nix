@@ -22,7 +22,6 @@ let
     mkdir -p "$EXT"
 
     export VSCODE_EXTENSIONS="$EXT"
-
     exec "$DST/code" "$@"
   '';
 
