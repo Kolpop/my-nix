@@ -3,19 +3,16 @@
 let
   quickshellSource = inputs.quickshell-hyprland;
 
-  # Copy upstream QML into a writable user directory. The Nix store itself
-  # is immutable, while the shell settings UI may need to write config files.
+  # Stage a clean, writable config from the pinned upstream source.
   quickshellConfig = pkgs.runCommand "quickshell-hyprland-config" {
-    nativeBuildInputs = [ pkgs.gnused pkgs.findutils ];
+    nativeBuildInputs = [ pkgs.findutils pkgs.gnused ];
   } ''
     mkdir -p "$out"
     cp -r ${quickshellSource}/.config/quickshell/. "$out/"
     chmod -R u+w "$out"
-
-    # Upstream files contain paths for the original maintainer. Use find
-    # directly instead of grep -rlZ | xargs to avoid shell/NUL handling issues.
-    find "$out" -type f -exec sed -i 's|/home/stopnope/.config/quickshell|/home/boris/.config/quickshell|g' {} +
-    find "$out" -type f -exec sed -i 's|/home/stopnope/.local/bin|/home/boris/.local/bin|g' {} +
+    find "$out" -type f -exec sed -i \
+      -e 's|/home/stopnope/.config/quickshell|/home/boris/.config/quickshell|g' \
+      -e 's|/home/stopnope/.local/bin|/home/boris/.local/bin|g' {} +
   '';
 in
 {
@@ -31,18 +28,33 @@ in
     playerctl
     libnotify
     rsync
+    killall
+    coreutils
+    findutils
+    fontconfig
+    imagemagick
   ];
 
   home.activation.installQuickshellConfig =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -p "$HOME/.config/quickshell"
+      $DRY_RUN_CMD mkdir -p "$HOME/.config"
 
-      # Seed missing files without overwriting settings changed by the user.
-      $DRY_RUN_CMD ${pkgs.rsync}/bin/rsync -a --ignore-existing ${quickshellConfig}/ "$HOME/.config/quickshell/"
+      # Keep a one-time backup, then deploy the pinned tree exactly.
+      if [ -d "$HOME/.config/quickshell" ] && [ ! -e "$HOME/.config/quickshell.nix-backup" ]; then
+        $DRY_RUN_CMD mv "$HOME/.config/quickshell" "$HOME/.config/quickshell.nix-backup"
+      else
+        $DRY_RUN_CMD rm -rf "$HOME/.config/quickshell"
+      fi
+      $DRY_RUN_CMD mkdir -p "$HOME/.config/quickshell"
+      $DRY_RUN_CMD ${pkgs.rsync}/bin/rsync -a --delete ${quickshellConfig}/ "$HOME/.config/quickshell/"
 
       $DRY_RUN_CMD mkdir -p "$HOME/.local/bin"
-      if [ ! -e "$HOME/.local/bin/screenshot.sh" ]; then
-        $DRY_RUN_CMD install -m 755 ${quickshellSource}/.local/bin/screenshot.sh "$HOME/.local/bin/screenshot.sh"
-      fi
+      $DRY_RUN_CMD install -m 755 ${quickshellSource}/.local/bin/screenshot.sh "$HOME/.local/bin/screenshot.sh"
+      $DRY_RUN_CMD install -m 755 ${quickshellSource}/update.sh "$HOME/.config/quickshell/scripts/updater.sh"
+      $DRY_RUN_CMD ln -sfn "$HOME/.config/quickshell/scripts/updater.sh" "$HOME/.local/bin/quickshell-update"
+      $DRY_RUN_CMD find "$HOME/.config/quickshell" -type f \( -name "*.py" -o -name "*.sh" \) -exec chmod u+x {} +
     '';
+
+  fonts.fontconfig.enable = true;
+  home.file.".local/share/fonts/quickshell".source = "${quickshellSource}/.config/quickshell/fonts";
 }
