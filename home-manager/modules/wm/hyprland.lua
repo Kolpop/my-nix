@@ -37,7 +37,7 @@ hl.config({
             enabled = true,
             range = 4,
             render_power = 3,
-            color = "rgba(1a1a1aee)",
+            color = "0xee1a1a1a",
         },
         blur = {
             enabled = true,
@@ -153,6 +153,8 @@ hl.bind(mainMod .. " + ALT + mouse_down", hl.dsp.exec_cmd(vxwm .. "zoom_out"))
 -- Numbered workspaces
 for i = 1, 10 do
     local key = i % 10
-    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+    local modifier = i == 10 and (mainMod .. " + CTRL + ") or (mainMod .. " + ")
+    local moveModifier = i == 10 and (mainMod .. " + CTRL + SHIFT + ") or (mainMod .. " + SHIFT + ")
+    hl.bind(modifier .. key, hl.dsp.focus({ workspace = i }))
+    hl.bind(moveModifier .. key, hl.dsp.window.move({ workspace = i }))
 end
