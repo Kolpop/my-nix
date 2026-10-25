@@ -28,7 +28,7 @@ in
     playerctl
     libnotify
     rsync
-    killall
+    psmisc
     coreutils
     findutils
     fontconfig
@@ -50,8 +50,6 @@ in
 
       $DRY_RUN_CMD mkdir -p "$HOME/.local/bin"
       $DRY_RUN_CMD install -m 755 ${quickshellSource}/.local/bin/screenshot.sh "$HOME/.local/bin/screenshot.sh"
-      $DRY_RUN_CMD install -m 755 ${quickshellSource}/update.sh "$HOME/.config/quickshell/scripts/updater.sh"
-      $DRY_RUN_CMD ln -sfn "$HOME/.config/quickshell/scripts/updater.sh" "$HOME/.local/bin/quickshell-update"
       $DRY_RUN_CMD find "$HOME/.config/quickshell" -type f \( -name "*.py" -o -name "*.sh" \) -exec chmod u+x {} +
     '';
 
