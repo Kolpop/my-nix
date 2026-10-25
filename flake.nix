@@ -13,7 +13,13 @@
     nixvim.url = "github:nix-community/nixvim";
     prismalauncher.url = "github:Diegiwg/PrismLauncher-Cracked";
 
+    # Upstream Quickshell shell configuration; do not run its install.sh.
+    quickshell-hyprland = {
+      url = "github:StopNope/quickshell-hyprland";
+      flake = false;
+    };
   };
+
   outputs =
     {
       nixpkgs,

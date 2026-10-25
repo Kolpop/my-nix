@@ -13,7 +13,7 @@
     ./modules/wm/hyprpaper.nix
     ./modules/wm/hyprland.nix
     ./modules/wm/hyprlock.nix
-    ./modules/wm/waybar.nix
+    ./modules/wm/quickshell.nix
     ./modules/wm/wlogout.nix
     ./modules/wm/rofi.nix
   ];
