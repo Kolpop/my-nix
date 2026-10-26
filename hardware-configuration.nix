@@ -39,6 +39,12 @@
     ];
   };
 
+  fileSystems."/home/boris/disk" = {
+    device = "/dev/disk/by-uuid/89e7969b-b184-4df4-af2e-298e43dfa556";
+    fsType = "ext4";
+    options = [ "nofail" ];
+  };
+
   swapDevices = [
     { device = "/dev/disk/by-uuid/62413b2b-4959-4417-bb58-3a83cb54f9ec"; }
   ];
